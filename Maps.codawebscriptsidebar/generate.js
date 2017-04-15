@@ -1,80 +1,85 @@
-//!generate map code...
+//done(@duncanmid): output map code
+
 function generateMapCode() {
 	
 	textview = CodaPlugInsController.makeUntitledDocument();
 	
-	//map width & height...
-	var width 				= $('#width').val();
-	var height 				= $('#height').val();
-	var widthUnits 			= $('#width-units').val();
-	var heightUnits 		= $('#height-units').val();
+	//note(@duncanmid): api key / lang
+	var
+	api 				= $('#api-key').val(),
+	lang 				= $('#lang').val(),
 	
-	//map center...
-	var mapLat				= $('#map-lat').val();
-	var mapLng				= $('#map-lng').val();
+	//note(@duncanmid): width / height
+	width 				= $('#width').val(),
+	height 				= $('#height').val(),
+	widthUnits 			= $('#width-units').val(),
+	heightUnits 		= $('#height-units').val(),
 	
-	//map options...
-	var mapType 			= $('#map-type').val();	
-	var mapTypeStyle 		= $('#map-type-menu').val();
-	var mapTypePosition 	= $('#map-type-position').val();
-	var zoom				= $('#zoom').val();
-	var zoomStyle 			= $('#zoom-type-menu').val();
-	var zoomPosition		= $('#zoom-position').val();
-	var panPosition			= $('#pan-position').val();
-	var streetviewPosition	= $('#streetview-position').val();
+	//note(@duncanmid): map center
+	mapLat				= $('#map-lat').val(),
+	mapLng				= $('#map-lng').val(),
 	
-	//marker...
-	var markerTitle 		= $('#marker-title').val();
-	var markerPath 			= $('#marker-shape').val();
-	var markerColor 		= $('#marker-color').val();
-	var markerOpacity 		= $('#fill-opacity').val();
-	var markerLat			= $('#marker-lat').val();
-	var markerLng			= $('#marker-lng').val();
-	var showStroke 			= $('#show-stroke').val();
-	var strokeColor 		= $('#stroke-color').val();
-	var strokeWidth 		= $('#stroke-width').val();
-	var strokeOpacity 		= $('#stroke-opacity').val();
+	//note(@duncanmid): map options
+	mapType 			= $('#map-type').val(),
+	mapTypeStyle 		= $('#map-type-menu').val(),
+	mapTypePosition 	= $('#map-type-position').val(),
+	zoom				= $('#zoom').val(),
+	zoomStyle 			= $('#zoom-type-menu').val(),
+	zoomPosition		= $('#zoom-position').val(),
+	streetviewPosition	= $('#streetview-position').val(),
 	
-	//infowindow...
-	var infoWindowContent 	= $('#info-window').val();
-	var infoWindowState 	= $('#info-window-state').val();
-	var infoWindowWidth 	= $('#info-window-width').val();	
+	//note(@duncanmid): marker
+	markerTitle 		= $('#marker-title').val(),
+	markerPath 			= $('#marker-shape').val(),
+	markerColor 		= $('#marker-color').val(),
+	markerOpacity 		= $('#fill-opacity').val(),
+	markerLat			= $('#marker-lat').val(),
+	markerLng			= $('#marker-lng').val(),
+	showStroke 			= $('#show-stroke').val(),
+	strokeColor 		= $('#stroke-color').val(),
+	strokeWidth 		= $('#stroke-width').val(),
+	strokeOpacity 		= $('#stroke-opacity').val(),
 	
-	//map styles...
-	var showLand,
-		showWater,
-		showWaterLabels,
-		showAdmin,
-		showAdminLabels,
-		showPoi,
-		showRoad,
-		showTrans;
+	//note(@duncanmid): infowindow
+	infoWindowContent 	= $('#info-window').val(),
+	infoWindowState 	= $('#info-window-state').val(),
+	infoWindowWidth 	= $('#info-window-width').val(),
 	
-	//map-colors...
-	var landH 				= colorsArray[$('#land-h').val()];
-	var landS 				= $('#land-s').val();
-	var landL 				= $('#land-l').val();
-	var landG				= $('#land-g').val();
-	var waterH 				= colorsArray[$('#water-h').val()];
-	var waterS 				= $('#water-s').val();
-	var waterL 				= $('#water-l').val();
-	var waterG 				= $('#water-g').val();	
-	var adminH 				= colorsArray[$('#admin-h').val()];
-	var adminS 				= $('#admin-s').val();
-	var adminL 				= $('#admin-l').val();
-	var adminG 				= $('#admin-g').val();	
-	var poiH 				= colorsArray[$('#poi-h').val()];
-	var poiS 				= $('#poi-s').val();
-	var poiL 				= $('#poi-l').val();
-	var poiG 				= $('#poi-g').val();	
-	var roadH 				= colorsArray[$('#road-h').val()];
-	var roadS 				= $('#road-s').val();
-	var roadL 				= $('#road-l').val();
-	var roadG 				= $('#road-g').val();	
-	var transH 				= colorsArray[$('#trans-h').val()];
-	var transS 				= $('#trans-s').val();
-	var transL 				= $('#trans-l').val();
-	var transG 				= $('#trans-g').val();
+	//note(@duncanmid): map styles
+	showLand,
+	showWater,
+	showWaterLabels,
+	showAdmin,
+	showAdminLabels,
+	showPoi,
+	showRoad,
+	showTrans,
+	
+	//note(@duncanmid): map colors
+	landH 				= colorsArray[$('#land-h').val()],
+	landS 				= $('#land-s').val(),
+	landL 				= $('#land-l').val(),
+	landG				= $('#land-g').val(),
+	waterH 				= colorsArray[$('#water-h').val()],
+	waterS 				= $('#water-s').val(),
+	waterL 				= $('#water-l').val(),
+	waterG 				= $('#water-g').val(),	
+	adminH 				= colorsArray[$('#admin-h').val()],
+	adminS 				= $('#admin-s').val(),
+	adminL 				= $('#admin-l').val(),
+	adminG 				= $('#admin-g').val(),	
+	poiH 				= colorsArray[$('#poi-h').val()],
+	poiS 				= $('#poi-s').val(),
+	poiL 				= $('#poi-l').val(),
+	poiG 				= $('#poi-g').val(),	
+	roadH 				= colorsArray[$('#road-h').val()],
+	roadS 				= $('#road-s').val(),
+	roadL 				= $('#road-l').val(),
+	roadG 				= $('#road-g').val(),	
+	transH 				= colorsArray[$('#trans-h').val()],
+	transS 				= $('#trans-s').val(),
+	transL 				= $('#trans-l').val(),
+	transG 				= $('#trans-g').val();
 	
 	
 	var mapCode = 	'<!doctype html>\n' +
@@ -82,7 +87,7 @@ function generateMapCode() {
 					'	<head>\n' +
 					'		<meta charset="utf-8" />\n' +
 					'		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">\n' +
-					'		<title>Google Map generated by Maps Coda 2.5 Sidebar Plugin</title>\n' +
+					'		<title>Google Map generated by Maps Coda 2.5 Sidebar Plugin | @duncanmid</title>\n' +
 					'		\n' +
 					'		<style>\n' +
 					'			html, body {\n' +
@@ -96,7 +101,7 @@ function generateMapCode() {
 					'				height: ' + height + heightUnits + ';\n' +
 					'			}\n';
 	
-	//infoWindow...
+	//note(@duncanmid): info window
 	if($('#add-info-window').is(':checked') && $('#show-marker').is(':checked')) {
 	
 		mapCode +=	'			\n' +
@@ -117,7 +122,16 @@ function generateMapCode() {
 
 		mapCode +=	'		</style>\n' +
 					'		\n' +
-					'		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>\n' +
+					'		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&language=' + lang;
+	
+	if( api.length > 0 ) {
+		
+		mapCode += '&key=' + api;	
+		
+	}				
+	
+		mapCode +=	'"></script>\n' +
+					
 					'		<script>\n' +
 					'			var map;\n' +
 					'			function initialize() {\n' +
@@ -126,7 +140,7 @@ function generateMapCode() {
 					'					mapTypeId: google.maps.MapTypeId.' + mapType + ',\n';
 
 	
-	//map type options...
+	//note(@duncanmid): map type options
 	if($('#show-map-type').is(':checked')) {
 
 		mapCode +=	'					mapTypeControl: true,\n' +
@@ -143,7 +157,7 @@ function generateMapCode() {
 		mapCode +=	'					zoom: ' + zoom + ',\n';
 	
 	
-	//zoom options...
+	//note(@duncanmid): zoom options
 	if($('#show-zoom').is(':checked')) {
 		
 		mapCode +=	'					zoomControl: true,\n' +
@@ -157,20 +171,7 @@ function generateMapCode() {
 	}
 	
 	
-	//pan options...
-	if($('#show-pan').is(':checked')) {
-		
-		mapCode +=	'					panControl: true,\n' +
-					'					panControlOptions: {\n' +
-					'						position: google.maps.ControlPosition.' + panPosition + '\n' +
-					'					},\n';		
-	} else {
-		
-		mapCode +=	'					panControl: false,\n';
-	}
-	
-	
-	//streetview options...
+	//note(@duncanmid): streetview options
 	if($('#show-streetview').is(':checked')) {
 		
 		mapCode +=	'					streetViewControl: true,\n' +
@@ -183,7 +184,7 @@ function generateMapCode() {
 	}
 	
 	
-	//scale options...
+	//note(@duncanmid): scale options
 	if($('#show-scale').is(':checked')) {
 		
 		mapCode +=	'					scaleControl: true,\n';
@@ -194,24 +195,13 @@ function generateMapCode() {
 	}
 	
 	
-	//overview options...
-	if($('#show-overview').is(':checked')) {
-		
-		mapCode +=	'					overviewMapControl: true,\n';
-		
-	} else {
-	
-		mapCode +=	'					overviewMapControl: false,\n';	
-	}
-	
-	
 		mapCode +=	'					center: new google.maps.LatLng(' + mapLat + ', ' + mapLng + ')\n' +
 					'				};\n' +
 					'				\n' +
 					'				map = new google.maps.Map(document.getElementById(\'map-canvas\'),\n' +
 					'					mapOptions);\n';
 	
-	//styled maps...
+	//note(@duncanmid): styled maps
 	if($('#show-styles').is(':checked')) {
 		
 		if($('#land').is(':checked')) {
@@ -399,7 +389,7 @@ function generateMapCode() {
 	}
 	
 	
-	//traffic layer...
+	//note(@duncanmid): traffic layer
 	if($('#traffic').is(':checked')) {
 		
 		mapCode +=	'				\n' +
@@ -408,7 +398,7 @@ function generateMapCode() {
 	}
 	
 	
-	//transit layer...
+	//note(@duncanmid): transit layer
 	if($('#transit').is(':checked')) {
 		
 		mapCode +=	'				\n' +
@@ -417,7 +407,7 @@ function generateMapCode() {
 	}
 	
 	
-	//bicycling layer...
+	//note(@duncanmid): bicycling layer
 	if($('#bicycling').is(':checked')) {
 		
 		mapCode +=	'				\n' +
@@ -426,7 +416,7 @@ function generateMapCode() {
 	}
 	
 	
-	//infowindow...
+	//note(@duncanmid): info window
 	if($('#add-info-window').is(':checked') && $('#show-marker').is(':checked')) {
 		
 		mapCode += 	'				\n' +
@@ -439,10 +429,9 @@ function generateMapCode() {
 	}
 	
 	
-	//marker...
+	//note(@duncanmid): marker
 	if($('#show-marker').is(':checked')) {
-	
-		//marker icon path and co-ordinates...
+		
 		var iconPath, iconX, iconY;
 	
 		switch ($('#marker-shape').val()) {
@@ -501,7 +490,7 @@ function generateMapCode() {
 				iconSize 	= 1.33;	
 		}
 	
-	//marker icon...
+	//note(@duncanmid): marker icon
 		mapCode +=	'				\n' +
 					'				var icon = {\n' +
 					'					path: \'' + iconPath + '\',\n' +
@@ -509,7 +498,7 @@ function generateMapCode() {
 					'					fillColor: \'' + markerColor + '\',\n' +
 					'					fillOpacity: ' + markerOpacity + ',\n';
 		
-	//marker stoke...
+	//note(@duncanmid): marker stoke
 	if($('#show-stroke').is(':checked')) {
 					
 		mapCode +=	'					strokeWeight: ' + strokeWidth + ',\n' +
@@ -535,10 +524,9 @@ function generateMapCode() {
 					'					title: \'' + markerTitle + '\'\n' +
 					'				});\n';
 		
-	}//end if marker...
+	}
 	
-	
-	//if infowindow...
+	//note(@duncanmid): if info window
 	if($('#add-info-window').is(':checked') && $('#show-marker').is(':checked')) {
 		
 		mapCode +=	'				\n' +
@@ -546,7 +534,7 @@ function generateMapCode() {
 					'					infowindow.open(map,marker);\n' +
 					'				});\n';
 		
-		//if infowindow is open...	
+		//note(@duncanmid): if infowindow is open	
 		if($('#info-window-state').val() === 'true') {	
 		
 		mapCode +=	'				\n' +
@@ -561,7 +549,7 @@ function generateMapCode() {
 					'			google.maps.event.addDomListener(window, \'load\', initialize);\n' +
 					'			\n';
 	
-	//if map is responsive...
+	//note(@duncanmid): if map is responsive
 	if(	widthUnits 		=== '%'		||
 		widthUnits 		=== 'vw'	||
 		widthUnits 		=== 'vh'	||
@@ -589,6 +577,7 @@ function generateMapCode() {
 					'	</body>\n' +
 					'</html>\n';
 	
-	window.CodaTextView.insertText(mapCode);
 	
+	//note(@duncanmid): inset map code
+	window.CodaTextView.insertText(mapCode);
 }
