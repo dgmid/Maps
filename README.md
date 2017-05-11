@@ -8,7 +8,7 @@ Maps for Coda 2.5 outputs perfect HTML / CSS and JavaScript for customized Googl
 
 ## Installation
 
-1. Download [Maps-WebScript-Sidebar-master.zip](https://github.com/dgmid/Maps/archive/master.zip).
+1. Download [Maps-master.zip](https://github.com/dgmid/Maps/archive/master.zip).
 2. Unzip it.
 3. Double-click the "Maps.codawebscriptsidebar" icon.
 
